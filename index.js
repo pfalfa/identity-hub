@@ -1,5 +1,3 @@
-// const path = require('path')
-// const Gun = require('gun')
 const helmet = require('helmet')
 const express = require('express')
 const bodyParser = require('body-parser')
