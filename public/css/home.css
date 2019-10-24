@@ -5,6 +5,9 @@
 body,
 html {
   font-family: Montserrat, 'Times New Roman', Times, serif;
+  background: linear-gradient(#f4aff0, #fdb0bc);
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 #full-height {
@@ -13,7 +16,7 @@ html {
   justify-content: center;
   align-items: center;
   font-size: 2em;
-  background: #ccc;
+  /* background: #ccc; */
 }
 
 .is-custom-primary {
