@@ -1,4 +1,5 @@
 const Gun = require('gun')
-require('gun/sea')
+const gun = Gun({ file: 'db' })
+// require('gun/sea')
 
-module.exports = Gun
+module.exports = gun

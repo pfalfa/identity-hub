@@ -13,7 +13,7 @@ html {
   justify-content: center;
   align-items: center;
   font-size: 2em;
-  /* background: #ccc; */
+  background: #ccc;
 }
 
 .is-custom-primary {
@@ -22,4 +22,8 @@ html {
 
 #loginForm {
   width: 35%;
+}
+
+.notification {
+  font-size: 0.5em;
 }

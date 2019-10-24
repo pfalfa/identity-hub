@@ -18,6 +18,10 @@ yarn.lock
 /files
 /uploads
 
+# gundb
+/db
+/data
+
 # misc
 .DS_Store
 .env.local
