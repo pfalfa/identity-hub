@@ -7,9 +7,8 @@ const login = (alias, pass) => {
 
     try {
       user.auth(alias, pass, ack => {
-        // console.log('==ack', ack)
-
         if (ack && ack.err) return resolve({ success: false, message: ack.err, data: null })
+        ack.sea.email = alias
         return resolve({ success: true, message: 'Login user successfully', data: ack.sea })
       })
     } catch (error) {
@@ -43,7 +42,6 @@ const getByPubKey = pubkey => {
 
     try {
       gun.user(pubkey).once(data => {
-        // console.log('==date', data)
         return resolve(data)
       })
     } catch (error) {
