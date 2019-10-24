@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="/css/home.css" rel="stylesheet" type="text/css" media="all" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <section id="full-height">
+        <div id="loginForm">
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                <p>Login to Proceed</p>
+                <form action="/login" method="POST">
+                  <div class="field">
+                    <p class="control has-icons-left">
+                      <input class="input" type="email" placeholder="Email" name="email" />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-envelope"></i>
+                      </span>
+                    </p>
+                  </div>
+                  <div class="field">
+                    <p class="control has-icons-left">
+                      <input class="input" type="password" placeholder="Password" name="password" />
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                      </span>
+                    </p>
+                  </div>
+                  <div class="field">
+                    <p class="control">
+                      <button class="button is-info is-rounded is-outlined">Log in</button>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
