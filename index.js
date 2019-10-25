@@ -1,11 +1,14 @@
+// const open = require('open')
 const helmet = require('helmet')
 const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+
+const config = require('./config')
 const { passport } = require('./src/utils')
 
 const app = express()
-const port = process.env.port || 3000
+const port = config.app.port
 
 app.set('view engine', 'ejs')
 
@@ -17,7 +20,7 @@ app.use(
   session({
     saveUninitialized: false,
     resave: false,
-    secret: process.env.SESSION_SECRET || 'some-secret',
+    secret: config.app.sessionSecret,
     cookie: {
       expires: new Date(Date.now() + 60 * 60 * 1000),
     },
@@ -37,6 +40,7 @@ app.get('*', (req, res) => {
   res.render('error404')
 })
 
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Identity hub on port ${port}`)
+  // await open(`http://localhost:${port}`, { wait: true })
 })
