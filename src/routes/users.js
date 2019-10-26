@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const { User } = require('../models')
 
 router.get('/', (req, res) => {
   res.render('dashboard')
@@ -12,9 +13,13 @@ router.get('/dashboard', (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-  req.logout()
-  req.session.destroy()
-  res.redirect('/')
+  User.logout()
+    .then(() => {
+      req.logout()
+      req.session.destroy()
+      res.redirect('/')
+    })
+    .catch(err => console.error(err))
 })
 
 module.exports = router
