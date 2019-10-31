@@ -5,7 +5,7 @@ Pfalfa Identity served as decentralized identity hub inside Pfalfa Platform.
 
 ## Usage
 ```bash
-# If using https access, please rename .env.example to be .env and configure HTTPS_KEY & HTTPS_CERT
+# If access using https, please rename .env.example to be .env and configure HTTPS_KEY & HTTPS_CERT
 
 # Install depedencies 
 $ npm install
