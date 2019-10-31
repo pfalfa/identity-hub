@@ -1,46 +1,28 @@
-// const open = require('open')
-const helmet = require('helmet')
-const express = require('express')
-const bodyParser = require('body-parser')
-const session = require('express-session')
-
+const fs = require('fs')
+const Gun = require('gun')
+const cluster = require('cluster')
 const config = require('./config')
-const { passport } = require('./src/utils')
+require('gun/sea')
 
-const app = express()
-const port = config.app.port
+if (cluster.isMaster) {
+  return (
+    cluster.fork() &&
+    cluster.on('exit', function() {
+      cluster.fork()
+    })
+  )
+}
 
-app.set('view engine', 'ejs')
+var options = { port: config.gundb.port }
+if (config.app.httpsKey && config.app.httpsCert) {
+  options.key = fs.readFileSync(config.app.httpsKey)
+  options.cert = fs.readFileSync(config.app.httpsCert)
+  options.server = require('https').createServer(options, Gun.serve(__dirname))
+} else {
+  options.server = require('http').createServer(Gun.serve(__dirname))
+}
 
-app.use(helmet())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-app.use(express.static('public'))
-app.use(
-  session({
-    saveUninitialized: false,
-    resave: false,
-    secret: config.app.sessionSecret,
-    cookie: {
-      expires: new Date(Date.now() + 60 * 60 * 1000),
-    },
-  })
-)
-
-app.use(passport.initialize())
-app.use(passport.session())
-
-app.use((req, res, next) => {
-  res.locals.user = req.user || null
-  next()
-})
-
-require('./src/routes')(app)
-app.get('*', (req, res) => {
-  res.render('error404')
-})
-
-app.listen(port, async () => {
-  console.log(`Identity hub on port ${port}`)
-  // await open(`http://localhost:${port}`, { wait: true })
-})
+const gun = Gun({ file: config.gundb.fileName, web: options.server.listen(options.port) })
+global.Gun = Gun
+global.gun = gun
+console.log('Identity database peer started on port ' + options.port + ' with /gun')
