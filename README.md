@@ -13,3 +13,12 @@ $ npm install
 # Run application
 $ npm run start
 ```
+
+## Using Docker
+```bash
+# Build docker image
+$ docker build -t pfalfa-ihub .
+
+# Run docker container
+$ docker run --name pfalfa-ihub -d -p 8765:8765 pfalfa-ihub
+```
