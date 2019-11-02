@@ -4,7 +4,7 @@
 # Run : docker run --name pfalfa-ihub -d -p 8765:8765 pfalfa-ihub
 #################################################################
 
-FROM alpine:latest
+FROM alpine:3.10
 
 WORKDIR /app
 ADD . .
