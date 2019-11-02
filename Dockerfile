@@ -14,4 +14,4 @@ RUN npm install
 RUN apk del .build-dependencies && rm -rf /var/cache/* /tmp/npm*
 
 EXPOSE 8778
-CMD ["npm","start"]
+CMD ["npm", "run", "start"]
