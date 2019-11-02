@@ -20,5 +20,5 @@ $ npm run start
 $ docker build -t pfalfa-ihub .
 
 # Run docker container
-$ docker run --name pfalfa-ihub -d -p 8765:8765 pfalfa-ihub
+$ docker run --name pfalfa-ihub -d -p 8778:8778 pfalfa-ihub
 ```

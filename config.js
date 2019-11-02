@@ -4,8 +4,7 @@ module.exports = {
     httpsCert: process.env.HTTPS_CERT && process.env.HTTPS_CERT !== '' ? process.env.HTTPS_CERT : null,
   },
   gundb: {
-    port: 8765,
+    port: 8778,
     fileName: 'db',
-    // peers: ['http://localhost:8765/gun', 'http://ec2-18-136-211-116.ap-southeast-1.compute.amazonaws.com:8765/gun'],
   },
 }
