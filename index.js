@@ -3,6 +3,9 @@ const Gun = require('gun')
 const cluster = require('cluster')
 const config = require('./config')
 require('gun/sea')
+// require('gun/lib/webrtc')
+require('gun/lib/path')
+require('gun/lib/server')
 
 if (cluster.isMaster) {
   return (
