@@ -22,15 +22,3 @@ EXPOSE 3080
 
 # execute
 CMD [ "node", "index.js" ]
-
-# FROM alpine:3.10
-
-# WORKDIR /app
-# ADD . .
-
-# RUN apk update && apk upgrade && apk add --no-cache ca-certificates nodejs-npm && apk add --no-cache --virtual .build-dependencies python make g++
-# RUN npm install
-# RUN apk del .build-dependencies && rm -rf /var/cache/* /tmp/npm*
-
-# EXPOSE 8778
-# CMD ["npm", "run", "start"]
