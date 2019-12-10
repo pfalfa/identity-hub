@@ -2,10 +2,10 @@ const fs = require('fs')
 const Gun = require('gun')
 const cluster = require('cluster')
 const config = require('./config')
-require('gun/sea')
+// require('gun/sea')
 // require('gun/lib/webrtc')
-require('gun/lib/path')
-require('gun/lib/server')
+// require('gun/lib/path')
+// require('gun/lib/server')
 
 if (cluster.isMaster) {
   return (
@@ -26,6 +26,6 @@ if (config.app.httpsKey && config.app.httpsCert) {
 }
 
 const gun = Gun({ file: config.gundb.fileName, web: options.server.listen(options.port) })
-global.Gun = Gun
-global.gun = gun
+// global.Gun = Gun
+// global.gun = gun
 console.log('Identity database peer started on port ' + options.port + ' with /gun')
