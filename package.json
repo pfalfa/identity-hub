@@ -5,7 +5,7 @@
   "repository": "git@github.com:pfalfa/identity-hub.git",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "gun": "^0.2019.1120"
