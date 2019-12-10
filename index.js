@@ -29,3 +29,4 @@ const gun = Gun({ file: config.gundb.fileName, web: options.server.listen(option
 // global.Gun = Gun
 // global.gun = gun
 console.log('Identity database peer started on port ' + options.port + ' with /gun')
+module.exports = gun
