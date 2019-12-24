@@ -44,7 +44,7 @@ module.exports = {
       },
       produces: ['application/json'],
       schemes: ['https'],
-      servers: [{ url: apiDoc }],
+      servers: [{ url: apiDoc }, { url: 'http://localhost:3003' }],
     },
     apis: ['./docs/api/*.js'],
   },
