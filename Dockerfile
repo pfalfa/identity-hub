@@ -10,15 +10,17 @@ FROM node:10
 WORKDIR /app
 
 # copy sources
-COPY ./package.json .
-COPY ./index.js .
-COPY ./config.js .
+COPY . .
+# COPY ./package.json .
+# COPY ./index.js .
+# COPY ./config.js .
 
 # install dependencies
 RUN npm install
 
 # expose port
-EXPOSE 3080
+EXPOSE 8778
+EXPOSE 3003
 
 # execute
 CMD [ "node", "index.js" ]
