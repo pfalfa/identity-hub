@@ -26,5 +26,4 @@ $ docker run --name pfalfa-ihub -d -p 8778:8778 pfalfa-ihub
 ```
 
 ## API Docs
-Document Online : [https://pfalfa-ihub-api.pfalfa.io/api](https://pfalfa-ihub-api.pfalfa.io/api/)  
-Demo Online : [https://pfalfa-ihub-api.pfalfa.io/api/demo](https://pfalfa-ihub-api.pfalfa.io/api/demo/)
+API Docs : [Repository](https://github.com/pfalfa/api-docs)  
