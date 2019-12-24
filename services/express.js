@@ -55,29 +55,29 @@ app.get(
 /** opening cluster */
 if (cluster.isMaster) {
   const cpus = os.cpus().length
+  console.log(`Mode Cluster. Forking for ${cpus} CPUs`)
+
   for (let i = 0; i < cpus; i++) {
     cluster.fork()
   }
-  console.log(`Mode Cluster. Forking for ${cpus} CPUs`)
 } else {
-  const port = config.app.port
-  server.listen(port, () => {
-    console.log(`Start Express Server on Port ${port} Handled by Process ${process.pid}`)
+  server.listen(config.app.port, () => {
+    console.log(`Start Express Server on Port ${config.app.port} Handled by Process ${process.pid}`)
     return
   })
-}
 
-/** closing cluster */
-process.on('SIGINT', () => {
-  server.close(err => {
-    if (err) {
-      console.error(`Error Express Server : ${err}`)
-      process.exit(1)
-      return
-    }
-    console.log(`Close Express Server on Port ${port} Handled by Process ${process.pid}`)
-    process.exit(0)
+  /** closing cluster */
+  process.on('SIGINT', () => {
+    server.close(err => {
+      if (err) {
+        console.error(`Error Express Server : ${err}`)
+        process.exit(1)
+        return
+      }
+      console.log(`Close Express Server on Port ${config.app.port} Handled by Process ${process.pid}`)
+      process.exit(0)
+    })
   })
-})
+}
 
 module.exports = app
