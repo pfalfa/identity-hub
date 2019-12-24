@@ -11,9 +11,6 @@ WORKDIR /app
 
 # copy sources
 COPY . .
-# COPY ./package.json .
-# COPY ./index.js .
-# COPY ./config.js .
 
 # install dependencies
 RUN npm install
