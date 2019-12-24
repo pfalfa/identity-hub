@@ -1,6 +1,4 @@
 require('dotenv').config()
-const { description, version, license } = require('./package.json')
-const apiDoc = 'https://pfalfa-ihub-api.pfalfa.io'
 
 module.exports = {
   app: {
@@ -18,34 +16,5 @@ module.exports = {
   gundb: {
     fileName: 'db',
     port: process.env.GUNDB_PORT || 8778,
-  },
-  swagger: {
-    swaggerDefinition: {
-      openapi: '3.0.1',
-      host: apiDoc,
-      basePath: '/',
-      info: {
-        title: 'Identity Hub API Docs',
-        version,
-        description,
-        // contact: { email: 'eksant@gmail.com' },
-        license: {
-          name: license,
-          url: 'http://www.apache.org/licenses/LICENSE-2.0.html',
-        },
-      },
-      securityDefinitions: {
-        bearerAuth: {
-          type: 'apiKey',
-          name: 'Authorization',
-          scheme: 'bearer',
-          in: 'header',
-        },
-      },
-      produces: ['application/json'],
-      schemes: ['https'],
-      servers: [{ url: apiDoc }, { url: 'http://localhost:3003' }],
-    },
-    apis: ['./docs/api/*.js'],
   },
 }

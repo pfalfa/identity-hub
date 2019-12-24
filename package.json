@@ -18,9 +18,7 @@
     "express-session": "^1.17.0",
     "gun": "^0.2019.1120",
     "helmet": "^3.21.2",
-    "morgan": "^1.9.1",
-    "swagger-jsdoc": "^3.5.0",
-    "swagger-ui-express": "^4.1.2"
+    "morgan": "^1.9.1"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

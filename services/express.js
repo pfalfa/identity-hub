@@ -1,5 +1,4 @@
 const os = require('os')
-const path = require('path')
 const cors = require('cors')
 const http = require('http')
 const https = require('https')
@@ -14,7 +13,6 @@ const session = require('express-session')
 /** express config */
 const config = require('../config')
 const routes = require('../routes')
-const { swaggerUi, swaggerConfig, swaggerUiSetup } = require('./swagger')
 const app = express().set('port', config.app.port)
 const server =
   !config.app.httpsKey && !config.app.httpsCert
@@ -37,20 +35,7 @@ app.use(logger('dev'))
 app.use(session({ secret: config.app.sessionSecret, resave: false, saveUninitialized: true, cookie: { maxAge: 60000 } }))
 
 /** router */
-routes(app, swaggerUi, swaggerUiSetup)
-
-/** api docs */
-app.get(config.app.route + '/swagger.json', (req, res) => {
-  res.setHeader('Content-Type', 'application/json')
-  res.send(swaggerConfig)
-})
-app.get(
-  config.app.route,
-  (req, res) => {
-    res.sendfile(path.join(__dirname, '../html/apidoc.html'))
-  },
-  swaggerUiSetup
-)
+routes(app)
 
 /** opening cluster */
 if (cluster.isMaster) {
