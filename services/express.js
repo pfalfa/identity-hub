@@ -48,7 +48,6 @@ if (cluster.isMaster) {
 } else {
   server.listen(config.app.port, () => {
     console.log(`Start Express Server on Port ${config.app.port} Handled by Process ${process.pid}`)
-    return
   })
 
   /** closing cluster */
