@@ -16,5 +16,6 @@ module.exports = {
   gundb: {
     fileName: 'db',
     port: process.env.GUNDB_PORT || 8778,
+    host: process.env.GUNDB_HOST || 'http://localhost:8778/gun',
   },
 }

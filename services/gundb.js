@@ -2,7 +2,7 @@ const fs = require('fs')
 const Gun = require('gun')
 const cluster = require('cluster')
 require('gun/sea')
-// require('gun/lib/webrtc')
+require('gun/lib/webrtc')
 // require('gun/lib/path')
 // require('gun/lib/server')
 
@@ -27,7 +27,12 @@ if (cluster.isMaster) {
   )
 }
 
-const gun = Gun({ file: config.gundb.fileName, web: init.db.listen(init.port), axe: false })
+const gun = Gun({
+  file: config.gundb.fileName,
+  web: init.db.listen(init.port),
+  peers: ['http://localhost:8778/gun', config.gundb.host],
+  axe: false,
+})
 const sea = Gun.SEA
 console.log(`Identity database peer started on port ${init.port} with /gun Handled by Process ${process.pid}`)
 

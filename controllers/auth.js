@@ -5,8 +5,8 @@ const register = (req, res) => {
   const { email, passphare, hint } = req.body
   if (!email || !passphare) return res.status(400).json({ success: false, message: 'Invalid payload', data: null })
 
-  // const user = gun.user().recall({ sessionStorage: false })
-  const user = gun.user()
+  // const user = gun.user()
+  const user = gun.user().recall({ sessionStorage: false })
   user.create(email, passphare, ack => {
     if (ack && ack.err) return res.status(400).json({ success: false, message: ack.err, data: null })
 
@@ -35,15 +35,17 @@ const login = (req, res) => {
   const { email, passphare } = req.body
   if (!email || !passphare) return res.status(400).json({ success: false, message: 'Invalid payload', data: null })
 
-  // const user = gun.user().recall({ sessionStorage: false })
-  const user = gun.user()
+  // const user = gun.user()
+  const user = gun.user().recall({ sessionStorage: false })
   user.auth(email, passphare, ack => {
     if (ack && ack.err) return res.status(400).json({ success: false, message: ack.err, data: null })
 
     const data = ack.sea
     user.get('profile').once(profile => {
-      delete profile._
-      data.profile = profile
+      if (profile) {
+        delete profile._
+        data.profile = profile
+      }
       return res.status(200).json({ success: true, message: 'User login successfully', data })
     })
   })
@@ -79,8 +81,8 @@ const reset = (req, res) => {
     delete data._
     const pwd = util.decrypt(data.pwd)
 
-    // const user = gun.user().recall({ sessionStorage: false })
-    const user = gun.user()
+    // const user = gun.user()
+    const user = gun.user().recall({ sessionStorage: false })
     user.auth(
       email,
       pwd.toString().trim(),
@@ -103,8 +105,8 @@ const changePassword = (req, res) => {
   const { email, oldPassphare, newPassphare } = req.body
   if (!email || !oldPassphare || !newPassphare) return res.status(400).json({ success: false, message: 'Invalid payload', data: null })
 
-  // const user = gun.user().recall({ sessionStorage: false })
-  const user = gun.user()
+  // const user = gun.user()
+  const user = gun.user().recall({ sessionStorage: false })
   user.auth(
     email,
     oldPassphare,
@@ -125,8 +127,8 @@ const unregister = (req, res) => {
   const { email, passphare } = req.body
   if (!email || !passphare) return res.status(400).json({ success: false, message: 'Invalid payload', data: null })
 
-  // const user = gun.user().recall({ sessionStorage: false })
-  const user = gun.user()
+  // const user = gun.user()
+  const user = gun.user().recall({ sessionStorage: false })
   user.auth(email, passphare, ack => {
     if (ack && ack.err) return res.status(400).json({ success: false, message: ack.err, data: null })
 
