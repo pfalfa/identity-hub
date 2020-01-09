@@ -21,7 +21,7 @@ const register = (req, res) => {
         if (ack && ack.err) return res.status(400).json({ success: false, message: ack.err, data: null })
 
         /** create user */
-        const userProfile = { email, hint: util.encrypt(hint), pwd: util.encrypt(passphare) }
+        const userProfile = { email, hint, pwd: passphare }
         gun.get(`user/${email}`).put(userProfile, ack => {
           if (ack && ack.err) return res.status(400).json({ success: false, message: ack.err, data: null })
           return res.status(201).json({ success: true, message: 'User created successfully', data })
@@ -57,7 +57,7 @@ const forgot = (req, res) => {
 
   gun.get(`user/${email}`).once(data => {
     if (!data) return res.status(400).json({ success: false, message: 'User not found', data: null })
-    if (util.decrypt(data.hint) !== hint) return res.status(400).json({ success: false, message: 'Recovery hint not correct', data: null })
+    if (data.hint !== hint) return res.status(400).json({ success: false, message: 'Recovery hint not correct', data: null })
 
     delete data._
     data.temp = util.randomPassword()
@@ -78,19 +78,16 @@ const reset = (req, res) => {
     if (data.temp.toString().trim() !== oldPassphare.toString().trim())
       return res.status(400).json({ success: false, message: 'Temp password not correct', data: null })
 
-    delete data._
-    const pwd = util.decrypt(data.pwd)
-
-    // const user = gun.user()
     const user = gun.user().recall({ sessionStorage: false })
     user.auth(
       email,
-      pwd.toString().trim(),
+      data.pwd,
       ack => {
         if (ack && ack.err) return res.status(400).json({ success: false, message: ack.err, data: null })
 
+        delete data._
         delete data.temp
-        data.pwd = util.encrypt(newPassphare)
+        data.pwd = newPassphare
         gun.get(`user/${email}`).put(data, ack => {
           if (ack && ack.err) return res.status(400).json({ success: false, message: ack.err, data: null })
           return res.status(200).json({ success: true, message: 'Reset password successfully', data: null })
@@ -113,7 +110,7 @@ const changePassword = (req, res) => {
     ack => {
       if (ack && ack.err) return res.status(400).json({ success: false, message: ack.err, data: null })
 
-      const data = { email, pwd: util.encrypt(newPassphare) }
+      const data = { email, pwd: newPassphare }
       gun.get(`user/${email}`).put(data, ack => {
         if (ack && ack.err) return res.status(400).json({ success: false, message: ack.err, data: null })
         return res.status(200).json({ success: true, message: 'Change password successfully', data: null })
